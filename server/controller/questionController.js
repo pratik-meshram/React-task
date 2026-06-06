@@ -3,19 +3,21 @@ import database from "../config/db.js";
 
 const questionAsk = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title, description, tags } = req.body;
         const userId = req.user.id;
 
         await database.query(
-            "INSERT INTO questionTable (title, description, user_id) VALUES ($1, $2, $3)",
-            [title, description, userId]
+            "INSERT INTO questionTable (title, description, user_id,tags) VALUES ($1, $2, $3,$4)",
+            [title, description, userId, tags]
         );
+        // console.log(title, description, userId);
 
         return res.status(201).json({
             message: "Question added successfully",
             data: {
                 title,
-                description
+                description,
+                tags
             }
         });
 
@@ -78,13 +80,13 @@ const getQuestionById = async (req, res) => {
 const updateQuestionById = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description } = req.body;
+        const { title, description, tags } = req.body;
 
         await database.query(
             `UPDATE questionTable
-             SET title = $1 , description =$2
-             WHERE id = $3`,
-            [title, description ,id]
+             SET title = $1 , description =$2,tags=$3
+             WHERE id = $4`,
+            [title, description, tags, id,]
         );
 
         return res.status(200).json({

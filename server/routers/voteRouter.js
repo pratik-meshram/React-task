@@ -3,7 +3,7 @@ const router = express.Router();
 
 import * as voteController from "../controller/voteController.js";
 
-router.post("/questions/:id/upvote", voteController.upVote);
-router.post("/questions/:id/downvote", voteController.downVote);
+router.post("/question/:id/upvote", voteController.upVote);
+router.post("/question/:id/downvote", voteController.downVote);
 
-export default router();
+export default router;

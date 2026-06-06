@@ -13,7 +13,10 @@ const submitAnswer = async (req, res) => {
         );
 
         return res.status(201).json({
-            message: "Answer successfully submitted"
+            message: "Answer successfully submitted",
+            data: {
+                answerText
+            }
         })
 
     } catch (error) {

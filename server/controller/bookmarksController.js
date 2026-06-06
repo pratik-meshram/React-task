@@ -14,7 +14,7 @@ const saveBookmarks = async (req, res) => {
 
         // Check already bookmarked or not
         const existing = await database.query(
-            "SELECT * FROM bookmarks WHERE user_id = $1 AND question_id = $2",
+            "SELECT * FROM bookmarkTable WHERE user_id = $1 AND question_id = $2",
             [user_id, question_id]
         );
 
@@ -26,7 +26,7 @@ const saveBookmarks = async (req, res) => {
 
         // Save bookmark
         await database.query(
-            "INSERT INTO bookmarks (user_id, question_id) VALUES ($1, $2)",
+            "INSERT INTO bookmarkTable (user_id, question_id) VALUES ($1, $2)",
             [user_id, question_id]
         );
 
@@ -56,7 +56,7 @@ const getBookmarks = async (req, res) => {
                 q.title,
                 q.description,
                 u.name AS question_owner
-            FROM bookmarks b
+            FROM bookmarkTable b
             JOIN questionTable q
                 ON b.question_id = q.id
             JOIN users u
@@ -88,7 +88,7 @@ const deleteBookmark = async (req, res) => {
 
         const result = await database.query(
             `
-            DELETE FROM bookmarks
+            DELETE FROM bookmarkTable
             WHERE user_id = $1 AND question_id = $2
             `,
             [user_id, question_id]

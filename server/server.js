@@ -8,13 +8,20 @@ import userData from "./routers/userRouter.js";
 import questions from "./routers/questionRouter.js";
 import answers from "./routers/answerRouter.js";
 import bookmarks from "./routers/bookmarksRouter.js";
-
+import vote from "./routers/voteRouter.js";
 
 dotenv.config();
 const app = express();
 
 
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+    })
+);
+
+
 app.use(express.json());
 
 app.use("/api", userData);
@@ -24,6 +31,8 @@ app.use(auth);
 app.use("/api", questions);
 app.use("/api", answers);
 app.use("/api", bookmarks);
+app.use("/api", vote);
+
 
 
 
