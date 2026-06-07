@@ -33,7 +33,7 @@ const questionAsk = async (req, res) => {
 const getQuestion = async (req, res) => {
     try {
         const result = await database.query(
-            "SELECT * FROM questionTable"
+            `SELECT * FROM questionTable ORDER BY id ASC;`
         );
 
         return res.status(200).json({

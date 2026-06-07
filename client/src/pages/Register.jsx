@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerUser } from "../services/authService";
+import { registerUser } from "../features/auth/authService";
 
 function Register() {
   const [name, setName] = useState("");
